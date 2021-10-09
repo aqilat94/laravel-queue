@@ -13,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
+                    <button type="button" class="btn btn-primary" onclick="window.location='{{ route('send:email') }}'">Send Email</button>
                 </div>
             </div>
         </div>
