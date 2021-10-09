@@ -3,11 +3,12 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 
 class SendEmail implements ShouldQueue
 {
@@ -30,6 +31,12 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-        //
+        Mail::send('email.send_email',[
+            'title' => 'test queue email',
+            'description' => 'hai',
+        ], function ($message) {
+            $message->to('test@mail.com');
+            $message->subject('Email using Inline Mail');
+        });
     }
 }
